@@ -21,7 +21,7 @@ public class AdyenJavaApiClient {
 
     /**
      * {@link Client} can be used for sending request.
-     * But we would prefer to create Feign client around Adyen REST API
+     * Also we can create Feign client around Adyen REST API
      *
      * @see AdyenApi
      */
