@@ -19,6 +19,9 @@ repositories {
 }
 
 dependencies {
+    // spring core
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
     // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springdoc:springdoc-openapi-core:1.1.49'
@@ -38,6 +41,9 @@ dependencies {
 
     // 3-rd party
     implementation 'org.atteo:evo-inflector:1.0.1'
+
+    // Adyen Payments
+    compile 'com.adyen:adyen-java-api-library:5.0.0'
 
     compileOnly 'org.projectlombok:lombok'
 
