@@ -11,10 +11,12 @@ PoC (Proof of Concept) project for testing Adyen payment provider.
 #### How to get available payment methods (Collect shopper details):
 
     Adyan recommends to use dynamically generated payment form: 
-    For each transaction, you make a /paymentMethods call in step 1 to determine the payment details you need to collect.
+    For each transaction, you make a /paymentMethods call in step 1 
+    to determine the payment details you need to collect.
     
     Then use the response to generate a form that collects them from the shopper. 
-    This takes more time to implement, but ensures that the required payment details you collect from the shopper are up-to-date.
+    This takes more time to implement, 
+    but ensures that the required payment details you collect from the shopper are up-to-date.
     
     Also you will always have up-to-date available payment methods.
 
