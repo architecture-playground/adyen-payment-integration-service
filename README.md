@@ -90,6 +90,35 @@ https://docs.adyen.com/payments-fundamentals/payment-glossary#authorisation
     
     In our case we would prefer to use auto-capture payments. Auto capturing is enabled by default.
 
+### 3D Secure
+
+Docs: https://docs.adyen.com/classic-integration/3d-secure
+Docs: https://docs.adyen.com/checkout/3d-secure
+
+    3D Secure is an authentication protocol that provides an additional layer of verification 
+    for card-not-present (CNP) transactions. 
+    We recommend that you use 3D Secure to comply with authentication regulations for online payments 
+    such as PSD2 SCA, and to make use of the liability shift.
+    
+    3D Secure has two available versions:
+    
+        3D Secure 1: Shoppers are redirected to the card issuer's site to provide additional authentication data, 
+        for example a password or an SMS verification code. 
+        The redirection might lead to lower conversion rates due to technical errors during the redirection, 
+        or shoppers dropping out of the authentication process.
+        
+        3D Secure 2: New version expected to replace 3D Secure 1 by 2020/2021. 
+        The card issuer performs the authentication within your website or mobile app using passive, biometric, 
+        and two-factor authentication approaches. For more information, refer to 3D Secure 2 authentication flows.
+
+    Until card schemes fully decommission 3D Secure 1 by 2020/2021, 
+    we expect that some issuing banks will continue to support and require 3D Secure 1. 
+    This means that you should be able to handle both 3D Secure 1 and 3D Secure 2 authentication on your checkout page.
+
+### Redirect 3DS API-only integration
+
+Docs: https://docs.adyen.com/checkout/3d-secure/redirect-3ds2-3ds1/api-only
+
 ### Used technologies:
 
 - Spring Boot
