@@ -50,6 +50,26 @@ Docs: https://docs.adyen.com/checkout/api-only?tab=%23codeBlockuKMzI_bash#step-2
 
 Docs: https://docs.adyen.com/checkout/api-only?tab=%23codeBlockuKMzI_bash#collect-card-details
 
+### Authorize / Capture
+
+Docs: https://docs.adyen.com/checkout/capture
+
+    For some payment methods, the payment is completed in two steps:
+    
+    Authorisation – The payment details of the shopper are verified, and the funds are reserved.
+    Capture – The reserved funds are transferred from the shopper to your account. 
+    By default, payments are captured immediately after authorisation. 
+    For payment methods that support separate authorisation and capture, 
+    you also have the option to capture the payment later, for example only after the goods have been shipped. 
+    This allows you to cancel the payment in case of any issues with the shipment. 
+    
+    To capture payments, you can use either:   
+    
+    Automatic capture – payments are captured automatically after authorisation. 
+    This is the default setting. You can optionally specify a delay between authorisation and automatic capture.
+    Manual capture – capture each payment manually by making a request to the /capture endpoint, 
+    or in your Customer Area. You can also schedule a capture by specifying  captureDelayHours in your payment request.
+
 ### Payment Authorization
 
 https://docs.adyen.com/payments-fundamentals/payment-glossary#authorisation
