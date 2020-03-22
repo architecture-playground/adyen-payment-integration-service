@@ -93,6 +93,7 @@ https://docs.adyen.com/payments-fundamentals/payment-glossary#authorisation
 ### 3D Secure
 
 Docs: https://docs.adyen.com/classic-integration/3d-secure
+
 Docs: https://docs.adyen.com/checkout/3d-secure
 
     3D Secure is an authentication protocol that provides an additional layer of verification 
