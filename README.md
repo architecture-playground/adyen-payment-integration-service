@@ -96,6 +96,8 @@ Docs: https://docs.adyen.com/classic-integration/3d-secure
 
 Docs: https://docs.adyen.com/checkout/3d-secure
 
+Possible 3D Secure flows: https://docs.adyen.com/classic-integration/3d-secure/native-3ds2/authentication-only-integration#web-based-authentication-only 
+
     3D Secure is an authentication protocol that provides an additional layer of verification 
     for card-not-present (CNP) transactions. 
     We recommend that you use 3D Secure to comply with authentication regulations for online payments 
