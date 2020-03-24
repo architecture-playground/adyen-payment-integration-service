@@ -5,6 +5,7 @@ import com.playground.adyen.dto.AdyenPaymentDetailsRequestDTO;
 import com.playground.adyen.service.AdyenPaymentDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,11 @@ public class AdyenPaymentDetailsController {
 
     private final AdyenPaymentDetailsService paymentDetailsService;
 
-    @PostMapping("/details")
+    @PostMapping(
+            path = "/details",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public PaymentsResponse sendPaymentDetails(@RequestBody AdyenPaymentDetailsRequestDTO request) {
         log.info("Request to send payment details");
         return paymentDetailsService.sendPaymentDetails(request);
