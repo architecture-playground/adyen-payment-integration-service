@@ -23,4 +23,5 @@ public class AdyenEncryptedCCPaymentRequestDTO extends AdyenBasePaymentRequestDT
     private String encryptedExpiryMonth;
     private String encryptedExpiryYear;
     private String encryptedSecurityCode;
+    private Adyen3DSecureInfoDTO adyen3DSecureInfoDTO;
 }

@@ -3,6 +3,7 @@ package com.playground.adyen.client;
 
 import com.adyen.Client;
 import com.adyen.model.Amount;
+import com.adyen.model.BrowserInfo;
 import com.adyen.model.checkout.PaymentsDetailsRequest;
 import com.adyen.model.checkout.PaymentsRequest;
 import com.adyen.model.checkout.PaymentsResponse;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Map;
+
+import static java.util.Objects.nonNull;
 
 /**
  * Docs: https://github.com/Adyen/adyen-java-api-library
@@ -36,7 +39,9 @@ public class AdyenJavaApiClient {
                                                    String encryptedSecurityCode,
                                                    String holderName,
                                                    String reference,
-                                                   String returnUrl) {
+                                                   String returnUrl,
+                                                   BrowserInfo browserInfo,
+                                                   String shopperIp) {
         try {
             log.info("Initiate encrypted CC payment with Adyen Java client. Reference {}", reference);
 
@@ -53,6 +58,13 @@ public class AdyenJavaApiClient {
             paymentsRequest.setReference(reference);
             paymentsRequest.addEncryptedCardData(encryptedCardNumber, encryptedExpiryMonth, encryptedExpiryYear, encryptedSecurityCode, holderName);
             paymentsRequest.setReturnUrl(returnUrl);
+
+            if (nonNull(browserInfo)) {
+                paymentsRequest.setBrowserInfo(browserInfo);
+                paymentsRequest.setShopperIP(shopperIp);
+                paymentsRequest.setChannel(PaymentsRequest.ChannelEnum.WEB);
+                paymentsRequest.setOrigin(adyenProps.getOrigin());
+            }
 
             return checkout.payments(paymentsRequest);
         } catch (ApiException ex) {

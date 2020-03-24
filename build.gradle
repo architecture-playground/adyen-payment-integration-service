@@ -38,6 +38,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.postgresql:postgresql:42.1.4'
     implementation 'org.flywaydb:flyway-core:5.2.4'
+    implementation 'com.vladmihalcea:hibernate-types-52:2.2.0'
 
     // 3-rd party
     implementation 'org.atteo:evo-inflector:1.0.1'

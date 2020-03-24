@@ -25,7 +25,7 @@ public class AdyenPaymentController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public PaymentsResponse payWithCreditCard(@RequestBody AdyenEncryptedCCPaymentRequestDTO request) {
-        log.info("Request to initiate Adyen credit card payment with reference {}", request.getReference());
+        log.info("Request to initiate Adyen credit card payment [{}]", request.getPaymentPayload());
         return paymentService.payWithCreditCard(request);
     }
 }

@@ -11,7 +11,7 @@ spring:
       dialect: org.hibernate.dialect.PostgreSQL95Dialect
       defaultSchema: public
   flyway:
-    schemas: public, adyen_payment
+    schemas: public, adyen
   cloud:
     consul:
       host: localhost
@@ -25,6 +25,7 @@ adyen:
   environment: ${ADYEN_ENV}
   liveEndpointUrlPrefix: ${ADYEN_LIVE_ENDPOINT_URL_PREFIX}
   merchantAccount: ${ADYEN_MERCHANRT_ACCOUNT}
+  origin: "https://your-fontend-site.com"
 
 springdoc:
   swagger-ui:
