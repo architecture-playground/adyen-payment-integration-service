@@ -15,12 +15,6 @@ public abstract class AdyenBasePaymentRequestDTO {
     private long amountInMinorUnits;
 
     /**
-     * The merchant account identifier, with which you want to process the transaction.
-     */
-    @NotNull
-    private String merchantAccount;
-
-    /**
      * The reference to uniquely identify a payment.
      * This reference is used in all communication with you about the payment status.
      * We recommend using a unique value per payment; however, it is not a requirement.
@@ -35,11 +29,4 @@ public abstract class AdyenBasePaymentRequestDTO {
      */
     @NotNull
     private String returnUrl;
-
-    /**
-     * The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID).
-     * <p>
-     * This field is required for recurring payments and optional for all others.
-     */
-    private String shopperReference;
 }
