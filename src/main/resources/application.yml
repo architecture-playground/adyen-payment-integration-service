@@ -1,4 +1,31 @@
+spring:
+  application:
+    name: adyen-payment-integration-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: system
+  jpa:
+    properties.hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL95Dialect
+      defaultSchema: public
+  flyway:
+    schemas: public, adyen_payment
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+server:
+  port: 15010
+
 adyen:
-  api-key: <replace_with_real_api_key>
-  environment: TEST
-  liveEndpointUrlPrefix: <replace_with_real_prefix>
+  apiKey: ${ADYEN_API_KEY}
+  environment: ${ADYEN_ENV}
+  liveEndpointUrlPrefix: ${ADYEN_LIVE_ENDPOINT_URL_PREFIX}
+  merchantAccount: ${ADYEN_MERCHANRT_ACCOUNT}
+
+springdoc:
+  swagger-ui:
+    path: /openapi-ui.html
