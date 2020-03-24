@@ -55,7 +55,10 @@ public class AdyenJavaApiClient {
             paymentsRequest.setReturnUrl(returnUrl);
 
             return checkout.payments(paymentsRequest);
-        } catch (ApiException | IOException ex) {
+        } catch (ApiException ex) {
+            log.info("Failed send payment to Adyen. Status: {}, Error: {}", ex.getStatusCode(), ex.getError());
+            throw new AdyenApiException();
+        } catch (IOException ex) {
             log.info("Failed send payment to Adyen", ex);
             throw new AdyenApiException();
         }
