@@ -31,6 +31,7 @@ public class AdyenTransaction {
     @Type(type = "pg-uuid")
     private UUID id;
 
+    @Type(type = "jsonb")
     @Column(name = "payment_payload")
     private String paymentPayload;
 
