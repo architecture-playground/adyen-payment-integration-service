@@ -13,4 +13,6 @@ public class AdyenProperties {
     private String apiKey;
     private Environment environment;
     private String liveEndpointUrlPrefix;
+    private String merchantAccount;
+    private String origin;
 }
