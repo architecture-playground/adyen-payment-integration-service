@@ -15,7 +15,6 @@ public class AdyenPaymentDetailsService {
     public PaymentsResponse sendPaymentDetails(AdyenPaymentDetailsRequestDTO request) {
         return adyenClient.sendPaymentDetails(
                 request.getPaymentData(),
-                request.getFingerprint(),
                 request.getPaymentDetails()
         );
     }

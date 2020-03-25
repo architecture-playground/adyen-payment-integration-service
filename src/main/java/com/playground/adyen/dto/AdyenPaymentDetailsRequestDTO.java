@@ -21,6 +21,4 @@ public class AdyenPaymentDetailsRequestDTO {
      * The paymentData value that you received in the response to the /payments call.
      */
     private String paymentData;
-
-    private String fingerprint;
 }

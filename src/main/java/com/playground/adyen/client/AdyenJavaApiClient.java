@@ -76,14 +76,14 @@ public class AdyenJavaApiClient {
         }
     }
 
-    public PaymentsResponse sendPaymentDetails(String paymentData, String fingerPrint, Map<String, String> paymentDetails) {
+    public PaymentsResponse sendPaymentDetails(String paymentData, Map<String, String> paymentDetails) {
         try {
             log.info("Send payment details");
 
             Checkout checkout = new Checkout(adyenClient);
             PaymentsDetailsRequest paymentsDetailsRequest = new PaymentsDetailsRequest()
                     .details(paymentDetails)
-                    .setFingerPrint(fingerPrint, paymentData);
+                    .paymentData(paymentData);
 
             return checkout.paymentsDetails(paymentsDetailsRequest);
         } catch (ApiException | IOException ex) {
