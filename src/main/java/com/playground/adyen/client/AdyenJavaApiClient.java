@@ -68,11 +68,11 @@ public class AdyenJavaApiClient {
 
             return checkout.payments(paymentsRequest);
         } catch (ApiException ex) {
-            log.info("Failed send payment to Adyen. Status: {}, Error: {}", ex.getStatusCode(), ex.getError());
-            throw new AdyenApiException();
+            log.info("Adyen responded with error. Status: {}, Error: {}", ex.getStatusCode(), ex.getError());
+            throw new AdyenApiException(ex.getError().getMessage());
         } catch (IOException ex) {
             log.info("Failed send payment to Adyen", ex);
-            throw new AdyenApiException();
+            throw new AdyenApiException("Unexpected I/O exception");
         }
     }
 
@@ -86,9 +86,12 @@ public class AdyenJavaApiClient {
                     .paymentData(paymentData);
 
             return checkout.paymentsDetails(paymentsDetailsRequest);
-        } catch (ApiException | IOException ex) {
+        } catch (ApiException ex) {
+            log.info("Adyen responded with error. Status: {}, Error: {}", ex.getStatusCode(), ex.getError());
+            throw new AdyenApiException(ex.getError().getMessage());
+        } catch (IOException ex) {
             log.info("Failed send payment to Adyen", ex);
-            throw new AdyenApiException();
+            throw new AdyenApiException("Unexpected I/O exception");
         }
     }
 }

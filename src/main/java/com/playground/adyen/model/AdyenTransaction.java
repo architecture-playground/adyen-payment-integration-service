@@ -1,7 +1,5 @@
 package com.playground.adyen.model;
 
-import com.adyen.model.checkout.CheckoutPaymentsAction;
-import com.adyen.model.checkout.PaymentsResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,13 +30,11 @@ public class AdyenTransaction {
     private UUID id;
 
     @Type(type = "jsonb")
-    @Column(name = "payment_payload")
+    @Column(columnDefinition = "jsonb", name = "payment_payload")
     private String paymentPayload;
 
-    @Type(type = "pgsql-enum")
-    @Enumerated(EnumType.STRING)
     @Column(name = "result_code")
-    private PaymentsResponse.ResultCodeEnum resultCode;
+    private String resultCode;
 
     @Column(name = "psp_reference")
     private String pspReference;
@@ -49,10 +45,8 @@ public class AdyenTransaction {
     @Column(name = "refusal_reason_code")
     private String refusalReasonCode;
 
-    @Type(type = "pgsql-enum")
-    @Enumerated(EnumType.STRING)
     @Column(name = "action_type")
-    private CheckoutPaymentsAction.CheckoutActionType actionType;
+    private String actionType;
 
     @Column(name = "action_url")
     private String actionUrl;
