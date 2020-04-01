@@ -71,6 +71,10 @@ public class AdyenPaymentService {
     }
 
     public List<AdyenTransactionDTO> getAll(Integer limit) {
+        if (limit == null) {
+            limit = Integer.MAX_VALUE;
+        }
+
         return transactionRepository.findAll(PageRequest.of(0, limit)).get()
                 .map(adyenTransactionConverter::toDto)
                 .collect(Collectors.toList());
