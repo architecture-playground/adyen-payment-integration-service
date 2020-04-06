@@ -21,3 +21,27 @@ Web Components Integration Guide from Adyen payment provider.
 - Ribbon for client side load balancing **(?)**
 - Flyway as Database migration tool
 - PostgreSQL as RDBMS
+
+#### 3D Secure Request Example:
+    {
+      "paymentPayload": "{\"payloadType\": \"ORDER_PAYMENT\", \"paymentPurpose\": \"ORDER_DOWNPAYMENT\", \"orderId\": \"a62c111b-a92d-45ec-a2fd-ec635425ebc7\"}",
+      "currency": "EUR",
+      "amountInMinorUnits": 20000,
+      "returnUrl": "https://url.com",
+      "holderName": "John Smith",
+      "encryptedCardNumber": "test_5212 3456 7890 1234",
+      "encryptedExpiryMonth": "test_10",
+      "encryptedExpiryYear": "test_2020",
+      "encryptedSecurityCode": "test_737",
+      "adyen3DSecureInfoDTO": {
+        "shopperIp": "string",
+        "userAgent": "string",
+        "acceptHeader": "string",
+        "language": "string",
+        "colorDepth": 0,
+        "screenHeight": 0,
+        "screenWidth": 0,
+        "timeZoneOffset": 0,
+        "javaEnabled": true
+      }
+    }
