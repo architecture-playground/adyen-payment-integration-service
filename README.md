@@ -10,7 +10,8 @@ Web Components Integration Guide from Adyen payment provider.
 #### Adyen API Explorer: https://docs.adyen.com/api-explorer/
 #### Web Components integration guide: https://docs.adyen.com/checkout/components-web
 #### Adyen Java API: https://github.com/Adyen/adyen-java-api-library
-#### Test Data: https://docs.adyen.com/development-resources/test-cards/test-card-numbers#visa
+#### CC Test Data: https://docs.adyen.com/development-resources/test-cards/test-card-numbers#visa
+#### SEPA Test Data: https://docs.adyen.com/payment-methods/sepa-direct-debit/api-only
 
 #### Used technologies:
 

@@ -8,6 +8,7 @@ import com.playground.adyen.converter.AdyenBrowserInfoConverter;
 import com.playground.adyen.converter.AdyenTransactionConverter;
 import com.playground.adyen.dto.Adyen3DSecureInfoDTO;
 import com.playground.adyen.dto.AdyenEncryptedCCPaymentRequestDTO;
+import com.playground.adyen.dto.AdyenSepaPaymentRequestDTO;
 import com.playground.adyen.dto.AdyenTransactionDTO;
 import com.playground.adyen.model.AdyenTransaction;
 import com.playground.adyen.repository.AdyenTransactionRepository;
@@ -49,11 +50,40 @@ public class AdyenPaymentService {
                 request.getEncryptedSecurityCode(),
                 request.getHolderName(),
                 transaction.getId().toString(),
-                request.getReturnUrl(),
                 browserInfo,
                 shopperIp
         );
 
+        updateTransactionState(transaction, response);
+        return response;
+    }
+
+    public PaymentsResponse payWithSepa(AdyenSepaPaymentRequestDTO request) {
+        AdyenTransaction transaction = transactionRepository.save(new AdyenTransaction(request.getPaymentPayload()));
+
+        PaymentsResponse response = adyenClient.sendSepaPayment(
+                transaction.getId().toString(),
+                request.getCurrency(),
+                request.getAmountInMinorUnits(),
+                request.getOwnerName(),
+                request.getIbanNumber()
+        );
+
+        updateTransactionState(transaction, response);
+        return response;
+    }
+
+    public List<AdyenTransactionDTO> getAll(Integer limit) {
+        if (limit == null) {
+            limit = Integer.MAX_VALUE;
+        }
+
+        return transactionRepository.findAll(PageRequest.of(0, limit)).get()
+                .map(adyenTransactionConverter::toDto)
+                .collect(Collectors.toList());
+    }
+
+    private void updateTransactionState(AdyenTransaction transaction, PaymentsResponse response) {
         transaction.setResultCode(response.getResultCode().getValue());
         transaction.setPspReference(response.getPspReference());
 
@@ -67,16 +97,5 @@ public class AdyenPaymentService {
         }
 
         transactionRepository.save(transaction);
-        return response;
-    }
-
-    public List<AdyenTransactionDTO> getAll(Integer limit) {
-        if (limit == null) {
-            limit = Integer.MAX_VALUE;
-        }
-
-        return transactionRepository.findAll(PageRequest.of(0, limit)).get()
-                .map(adyenTransactionConverter::toDto)
-                .collect(Collectors.toList());
     }
 }

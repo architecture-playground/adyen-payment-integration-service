@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public abstract class AdyenBasePaymentRequestDTO {
 
-    @NotNull
     private String paymentPayload;
 
     @NotNull
@@ -16,10 +15,4 @@ public abstract class AdyenBasePaymentRequestDTO {
 
     @NotNull
     private long amountInMinorUnits;
-
-    /**
-     * The URL to return to in case of a redirection. The format depends on the channel.
-     */
-    @NotNull
-    private String returnUrl;
 }
