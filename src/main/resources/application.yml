@@ -2,7 +2,9 @@ spring:
   application:
     name: adyen-payment-integration-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/
+    # each microservice should have its own database
+    # to prevent clashing of the migration schema version.
+    url: jdbc:postgresql://localhost:5432/adyen
     driverClassName: org.postgresql.Driver
     username: postgres
     password: system
