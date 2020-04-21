@@ -1,0 +1,6 @@
+adyen:
+  apiKey: test-api-key
+  environment: TEST
+  liveEndpointUrlPrefix: test-live-prefix
+  merchantAccount: test-merchant
+  origin: "https://your-fontend-site.com"
