@@ -40,7 +40,7 @@ echo "** Tests finished"
 
                 sh('''#!/bin/bash -ex
 echo "** Building application docker image started" && \\
-docker build --target app -t architectureplayground/payment:latest . && \\
+docker build --target app -t architectureplayground/adyen-payment-service:latest . && \\
 echo "** Building application docker image finished" && \\
 
 echo "** Start pushing docker image in docker hub repository" && \\
