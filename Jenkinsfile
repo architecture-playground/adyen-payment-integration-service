@@ -25,7 +25,12 @@ echo "** Tests finished"
 ''')
             }
         }
-        stage("Push Docker Image") {
+        stage("Check branch for docker push") {
+            when {
+                expression {
+                    return env.BRANCH_NAME == 'master';
+                }
+            }
             steps {
                 echo "** Docker login started"
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_architectureplayground', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -33,15 +38,15 @@ echo "** Tests finished"
                 }
                 echo "** Docker login finished"
 
-                sh '''#!/bin/bash -ex
+                sh('''#!/bin/bash -ex
 echo "** Building application docker image started" && \\
 docker build --target app -t architectureplayground/payment:latest . && \\
 echo "** Building application docker image finished" && \\
 
 echo "** Start pushing docker image in docker hub repository" && \\
-docker push architectureplayground/payment:latest && \\
+docker push architectureplayground/adyen-payment-service:latest && \\
 echo "** Docker image pushed to docker hub repository"
-                    '''
+                    ''')
             }
         }
     }
