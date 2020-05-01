@@ -1,0 +1,12 @@
+version: '3.2'
+
+services:
+  adyen-payment:
+    # TODO : rename repository to architectureplayground/adyen-payment-service
+    # TODO : https://docs.docker.com/docker-hub/repos/
+    # TODO : looks that "-" cannot be used only in docker hub name, but we can use it in repository names
+    # also rename all others docker hub repositories and append "-service" for all where we have "-service" in github repository name
+    image: 'architectureplayground/payment:latest'
+    user: root
+    ports:
+      - 15010:15010
