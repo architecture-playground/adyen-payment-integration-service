@@ -1,4 +1,5 @@
 #!groovy
+@Library('jenkins-libraries')_
 
 properties([disableConcurrentBuilds()])
 
