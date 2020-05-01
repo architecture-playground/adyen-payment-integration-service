@@ -12,22 +12,21 @@ pipeline {
         timestamps()
     }
     stages {
-        stages {
-            stage("Tests") {
-                steps {
-                    tests("adyen-payment-integration-service")
+
+        stage("Tests") {
+            steps {
+                tests("adyen-payment-integration-service")
+            }
+        }
+        stage("check branch and push to Docker hub repository") {
+            when {
+                expression {
+                    print(env.BRANCH_NAME)
+                    return env.BRANCH_NAME == 'master';
                 }
             }
-            stage("check branch and push to Docker hub repository") {
-                when {
-                    expression {
-                        print(env.BRANCH_NAME)
-                        return env.BRANCH_NAME == 'master';
-                    }
-                }
-                steps {
-                    pushImageToRepository("adyen-payment-integration-service")
-                }
+            steps {
+                pushImageToRepository("adyen-payment-integration-service")
             }
         }
     }
