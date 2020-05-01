@@ -12,7 +12,6 @@ pipeline {
         timestamps()
     }
     stages {
-
         stage("Tests") {
             steps {
                 tests("adyen-payment-integration-service")
