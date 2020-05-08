@@ -31,7 +31,6 @@ pipeline {
         stage("Push to Docker Hub") {
             when {
                 expression {
-                    print(env.BRANCH_NAME)
                     return env.BRANCH_NAME == 'master';
                 }
             }
