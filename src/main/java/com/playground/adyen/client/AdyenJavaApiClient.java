@@ -101,14 +101,16 @@ public class AdyenJavaApiClient {
     private PaymentsRequest buildBasePaymentsRequest(String currency, long amountInMinorUnits, String reference) {
         PaymentsRequest paymentsRequest = new PaymentsRequest();
         paymentsRequest.setMerchantAccount(adyenProps.getMerchantAccount());
+        paymentsRequest.setAmount(buildAmount(currency, amountInMinorUnits));
+        paymentsRequest.setReference(reference);
+        return paymentsRequest;
+    }
 
+    private Amount buildAmount(String currency, long amountInMinorUnits) {
         Amount amount = new Amount();
         amount.setCurrency(currency);
         amount.setValue(amountInMinorUnits);
-        paymentsRequest.setAmount(amount);
-
-        paymentsRequest.setReference(reference);
-        return paymentsRequest;
+        return amount;
     }
 
     private <T> T wrapAdyenCall(ExceptionalSupplier<T, Exception> dataFetcher) {
