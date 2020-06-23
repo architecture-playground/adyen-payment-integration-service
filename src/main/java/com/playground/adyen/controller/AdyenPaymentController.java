@@ -36,7 +36,7 @@ public class AdyenPaymentController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public PaymentsResponse payWithCreditCard(@RequestBody @Valid AdyenSepaPaymentRequestDTO request) {
+    public PaymentsResponse payWithSepa(@RequestBody @Valid AdyenSepaPaymentRequestDTO request) {
         log.info("Request to initiate Adyen SEPA payment [{}]", request.getPaymentPayload());
         return paymentService.payWithSepa(request);
     }
