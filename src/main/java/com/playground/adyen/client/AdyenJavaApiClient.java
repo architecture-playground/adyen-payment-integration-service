@@ -5,6 +5,7 @@ import com.adyen.Client;
 import com.adyen.model.Amount;
 import com.adyen.model.ApiError;
 import com.adyen.model.BrowserInfo;
+import com.adyen.model.RequestOptions;
 import com.adyen.model.checkout.DefaultPaymentMethodDetails;
 import com.adyen.model.checkout.PaymentsDetailsRequest;
 import com.adyen.model.checkout.PaymentsRequest;
@@ -60,7 +61,7 @@ public class AdyenJavaApiClient {
                 paymentsRequest.setOrigin(adyenProps.getOrigin());
             }
 
-            return checkout.payments(paymentsRequest);
+            return checkout.payments(paymentsRequest, idempotencyHeader(currency, amountInMinorUnits, holderName));
         });
     }
 
@@ -81,7 +82,7 @@ public class AdyenJavaApiClient {
             paymentMethodDetails.setType(SEPA_DIRECT_DEBIT);
             paymentsRequest.setPaymentMethod(paymentMethodDetails);
 
-            return checkout.payments(paymentsRequest);
+            return checkout.payments(paymentsRequest, idempotencyHeader(currency, amountInMinorUnits, ownerName));
         });
     }
 
@@ -101,14 +102,26 @@ public class AdyenJavaApiClient {
     private PaymentsRequest buildBasePaymentsRequest(String currency, long amountInMinorUnits, String reference) {
         PaymentsRequest paymentsRequest = new PaymentsRequest();
         paymentsRequest.setMerchantAccount(adyenProps.getMerchantAccount());
+        paymentsRequest.setAmount(buildAmount(currency, amountInMinorUnits));
+        paymentsRequest.setReference(reference);
+        return paymentsRequest;
+    }
 
+    private Amount buildAmount(String currency, long amountInMinorUnits) {
         Amount amount = new Amount();
         amount.setCurrency(currency);
         amount.setValue(amountInMinorUnits);
-        paymentsRequest.setAmount(amount);
+        return amount;
+    }
 
-        paymentsRequest.setReference(reference);
-        return paymentsRequest;
+    private RequestOptions idempotencyHeader(String currency, long amountInMinorUnits, String holderName) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setIdempotencyKey(buildIdempotencyKey(amountInMinorUnits, currency, holderName));
+        return requestOptions;
+    }
+
+    private String buildIdempotencyKey(long amountInMinorUnits, String currency, String holderName) {
+        return "IDEMPOTENCY-KEY-" + amountInMinorUnits + "-" + currency + "-" + holderName;
     }
 
     private <T> T wrapAdyenCall(ExceptionalSupplier<T, Exception> dataFetcher) {

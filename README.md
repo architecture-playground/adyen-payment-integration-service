@@ -46,3 +46,12 @@ Web Components Integration Guide from Adyen payment provider.
         "javaEnabled": true
       }
     }
+
+#### SEPA Request Example:
+    {
+      "paymentPayload": "{\"payloadType\": \"ORDER_PAYMENT\", \"paymentPurpose\": \"ORDER_DOWNPAYMENT\", \"orderId\": \"a62c111b-a92d-45ec-a2fd-ec635425ebc7\"}",
+      "currency": "EUR",
+      "amountInMinorUnits": 40000,
+      "ownerName": "A. Klaassen",
+      "ibanNumber": "NL13TEST0123456789"
+    }
