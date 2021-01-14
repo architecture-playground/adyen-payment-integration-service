@@ -1,5 +1,6 @@
 # adyen-payment-integration-service
 
+#### Swagger
 Documentation is available at http://localhost:15010/openapi-ui.html
 
 PoC (Proof of Concept) project for representing implementation of 
