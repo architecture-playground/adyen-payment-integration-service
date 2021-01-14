@@ -10,3 +10,11 @@ services:
     user: root
     ports:
       - 15010:15010
+
+  db_posgtgres:
+    image: postgres:9.6
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: system

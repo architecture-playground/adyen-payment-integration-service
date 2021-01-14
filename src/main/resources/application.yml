@@ -14,10 +14,10 @@ spring:
       defaultSchema: public
   flyway:
     schemas: public, adyen
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
+#  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
 
 server:
   port: 15010
