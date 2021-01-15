@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.adyen.constants.BrandCodes.PAYPAL;
 import static com.adyen.constants.BrandCodes.SEPA_DIRECT_DEBIT;
 import static java.util.Objects.nonNull;
 
@@ -81,6 +82,26 @@ public class AdyenJavaApiClient {
             paymentMethodDetails.setSepaIbanNumber(ibanNumber);
             paymentMethodDetails.setType(SEPA_DIRECT_DEBIT);
             paymentsRequest.setPaymentMethod(paymentMethodDetails);
+
+            return checkout.payments(paymentsRequest, idempotencyHeader(currency, amountInMinorUnits, ownerName));
+        });
+    }
+
+    public PaymentsResponse sendPaypalPayment(String reference,
+                                              String currency,
+                                              Long amountInMinorUnits,
+                                              String ownerName,
+                                              String returnUrl) {
+        return wrapAdyenCall(() -> {
+            log.info("Initiate sepa dd payment with Adyen Java client. Reference {}", reference);
+
+            Checkout checkout = new Checkout(adyenClient);
+            PaymentsRequest paymentsRequest = buildBasePaymentsRequest(currency, amountInMinorUnits, reference);
+
+            DefaultPaymentMethodDetails paymentMethodDetails = new DefaultPaymentMethodDetails();
+            paymentMethodDetails.setType(PAYPAL);
+            paymentsRequest.setPaymentMethod(paymentMethodDetails);
+            paymentsRequest.setReturnUrl(returnUrl);
 
             return checkout.payments(paymentsRequest, idempotencyHeader(currency, amountInMinorUnits, ownerName));
         });

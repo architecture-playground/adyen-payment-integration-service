@@ -6,10 +6,7 @@ import com.adyen.model.checkout.PaymentsResponse;
 import com.playground.adyen.client.AdyenJavaApiClient;
 import com.playground.adyen.converter.AdyenBrowserInfoConverter;
 import com.playground.adyen.converter.AdyenTransactionConverter;
-import com.playground.adyen.dto.Adyen3DSecureInfoDTO;
-import com.playground.adyen.dto.AdyenEncryptedCCPaymentRequestDTO;
-import com.playground.adyen.dto.AdyenSepaPaymentRequestDTO;
-import com.playground.adyen.dto.AdyenTransactionDTO;
+import com.playground.adyen.dto.*;
 import com.playground.adyen.model.AdyenTransaction;
 import com.playground.adyen.repository.AdyenTransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -72,6 +69,22 @@ public class AdyenPaymentService {
         updateTransactionState(transaction, response);
         return response;
     }
+
+    public PaymentsResponse payWithPaypal(AdyenPaypalPaymentRequestDTO request) {
+        AdyenTransaction transaction = transactionRepository.save(new AdyenTransaction(request.getPaymentPayload()));
+
+        PaymentsResponse response = adyenClient.sendPaypalPayment(
+                transaction.getId().toString(),
+                request.getCurrency(),
+                request.getAmountInMinorUnits(),
+                "John Smith",
+                request.getReturnUrl()
+        );
+
+        updateTransactionState(transaction, response);
+        return response;
+    }
+
 
     public List<AdyenTransactionDTO> getAll(Integer limit) {
         if (limit == null) {

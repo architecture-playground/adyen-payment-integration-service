@@ -25,7 +25,29 @@ Web Components Integration Guide from Adyen payment provider.
 - Flyway as Database migration tool
 - PostgreSQL as RDBMS
 
-#### 3D Secure Request Example:
+
+#### Simple PayPal payment example:
+    {
+      "paymentPayload": "{\"payloadType\": \"ORDER_PAYMENT\", \"paymentPurpose\": \"ORDER_DOWNPAYMENT\", \"orderId\": \"a62c111b-a92d-45ec-a2fd-ec635425ebc7\"}",
+      "currency": "EUR",
+      "amountInMinorUnits": 5000
+      "returnUrl": "localhost:15010"
+    }
+
+#### Simple Credit Card payment example:
+    {
+      "paymentPayload": "{\"payloadType\": \"ORDER_PAYMENT\", \"paymentPurpose\": \"ORDER_DOWNPAYMENT\", \"orderId\": \"a62c111b-a92d-45ec-a2fd-ec635425ebc7\"}",
+      "currency": "EUR",
+      "amountInMinorUnits": 20000,
+      "returnUrl": "https://url.com",
+      "holderName": "John Smith",
+      "encryptedCardNumber": "test_5212 3456 7890 1234",
+      "encryptedExpiryMonth": "test_10",
+      "encryptedExpiryYear": "test_2020",
+      "encryptedSecurityCode": "test_737",
+    }
+
+#### 3D Secure CC Request Example:
     {
       "paymentPayload": "{\"payloadType\": \"ORDER_PAYMENT\", \"paymentPurpose\": \"ORDER_DOWNPAYMENT\", \"orderId\": \"a62c111b-a92d-45ec-a2fd-ec635425ebc7\"}",
       "currency": "EUR",
