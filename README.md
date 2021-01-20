@@ -30,7 +30,7 @@ Web Components Integration Guide from Adyen payment provider.
     {
       "paymentPayload": "{\"payloadType\": \"ORDER_PAYMENT\", \"paymentPurpose\": \"ORDER_DOWNPAYMENT\", \"orderId\": \"a62c111b-a92d-45ec-a2fd-ec635425ebc7\"}",
       "currency": "EUR",
-      "amountInMinorUnits": 5000
+      "amountInMinorUnits": 5000,
       "returnUrl": "localhost:15010"
     }
 
